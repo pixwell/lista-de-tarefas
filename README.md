@@ -1,75 +1,67 @@
-# React + TypeScript + Vite
+# Lista de Tarefas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web de gerenciamento de tarefas desenvolvida com React e TypeScript, com persistência de dados no navegador.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* React Icons
+* LocalStorage
 
-## React Compiler
+## ✨ Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Criar uma tarefa
+* Visualizar a lista de tarefas
+* Editar uma tarefa
+* Marcar uma tarefa como concluída
+* Desmarcar uma tarefa como concluída
+* Excluir uma tarefa
+* Filtrar tarefas por status:
 
-## Expanding the ESLint configuration
+  * Todas
+  * Pendentes
+  * Concluídas
+* Exibir a quantidade de tarefas pendentes
+* Persistir tarefas no `localStorage`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📋 Regras de negócio
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* O título da tarefa é obrigatório.
+* Não é permitido criar ou salvar uma tarefa vazia.
+* Uma tarefa pode ser editada e salva ou ter a edição cancelada.
+* Ao cancelar uma edição, o título original é preservado.
+* A exclusão de uma tarefa é realizada imediatamente, sem confirmação.
+* As tarefas permanecem disponíveis após o recarregamento da página.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📭 Estados vazios
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Quando não houver tarefas para exibir, a aplicação apresenta uma mensagem de acordo com o filtro selecionado:
 
+* **Todas:** Nenhuma tarefa cadastrada.
+* **Pendentes:** Nenhuma tarefa pendente.
+* **Concluídas:** Nenhuma tarefa concluída.
+
+## 🛠️ Instalação
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+
+cd <NOME_DO_PROJETO>
+
+npm install
+
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🌐 Deploy
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+O projeto será publicado na Vercel.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Demo:** Em breve.
 
-```
+## 📌 Status
+
+Em desenvolvimento.
