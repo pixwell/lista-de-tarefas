@@ -7,7 +7,7 @@
   --color-primary: #E11138;
   --color-primary-hover: #e23b59;
   --color-secondary: #000000;
-  --color-secondary-hover: #e23b59;
+  --color-secondary-hover: #e2Ab59;
   --bg-primary: #F3F5F8;
 }
 
@@ -45,7 +45,7 @@
   a,
   button,
   input[type="submit"] {
-    @apply transition-all duration-500;
+    @apply transition-all duration-300;
   }
 }
 
@@ -54,7 +54,6 @@
   /* Botoes */
   .btn{
     @apply 
-
     px-4 
     py-2 
     inline-block 
@@ -62,20 +61,10 @@
 
     text-center
     text-sm
-    hover:scale-105 
+    text-gray-600
+    border
+    hover:scale-105 hover:shadow-sm
     cursor-pointer;
-  }
-
-  .btn-red{
-    @apply bg-primary text-white hover:bg-primary-hover;
-  }
-
-  .btn-green{
-    @apply bg-primary text-white hover:bg-primary-hover;
-  }
-
-  .btn-grafite{
-    @apply text-white bg-gray-900 hover:bg-gray-800;
   }
 }
 
