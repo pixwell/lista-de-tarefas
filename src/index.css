@@ -1,18 +1,45 @@
 @import "tailwindcss";
 
 /* Breakpoints customizados */
-@theme {}
+@theme {
+  --font-primary: "Inter", sans-serif;
+  --font-secondary: "Poppins", sans-serif;
+  --color-primary: #E11138;
+  --color-primary-hover: #e23b59;
+  --color-secondary: #000000;
+  --color-secondary-hover: #e23b59;
+  --bg-primary: #F3F5F8;
+}
 
 /* Classes globais ============================== */
 @layer base {
+  body{
+    background-color: var(--bg-primary);
+    font-family: var(--font-secondary);
+  }
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-bold mb-3;
+    font-family: var(--font-primary); 
+    @apply mb-3 font-bold;
   }
+
+  h1{
+    @apply text-4xl
+  }
+
+  h2{
+    @apply text-3xl
+  }
+
+  h3{
+    @apply text-2xl
+  }
+
 
   /* Transicao suave em todos os links do site */
   a,
@@ -23,7 +50,38 @@
 }
 
 /* Componentes de UI ============================== */
-@layer components {}
+@layer components {
+  /* Botoes */
+  .btn{
+    @apply 
+
+    px-4 
+    py-2 
+    inline-block 
+    rounded-lg 
+
+    text-center
+    text-sm
+    hover:scale-105 
+    cursor-pointer;
+  }
+
+  .btn-red{
+    @apply bg-primary text-white hover:bg-primary-hover;
+  }
+
+  .btn-green{
+    @apply bg-primary text-white hover:bg-primary-hover;
+  }
+
+  .btn-grafite{
+    @apply text-white bg-gray-900 hover:bg-gray-800;
+  }
+}
 
 /* Classes customizados pontuais ================== */
-@layer utilities {}
+@layer utilities {
+  .container { 
+    @apply max-w-6xl mx-auto px-4;
+  }
+}
