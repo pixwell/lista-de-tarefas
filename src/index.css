@@ -8,14 +8,17 @@
   --color-primary-hover: #e23b59;
   --color-secondary: #000000;
   --color-secondary-hover: #e2Ab59;
-  --bg-primary: #F3F5F8;
+  --background-primary: #F3F5F8;
 }
 
 /* Classes globais ============================== */
 @layer base {
+  
   body{
-    background-color: var(--bg-primary);
     font-family: var(--font-secondary);
+    @apply
+    bg-(--background-primary)
+    text-zinc-600 
   }
 
   h1,
@@ -25,7 +28,10 @@
   h5,
   h6 {
     font-family: var(--font-primary); 
-    @apply mb-3 font-bold;
+    @apply 
+    font-bold
+    text-zinc-800
+    mb-3
   }
 
   h1{
@@ -47,11 +53,30 @@
   input[type="submit"] {
     @apply transition-all duration-300;
   }
+
+  input[type="text"]{
+    @apply
+    w-full 
+    p-2 
+    border border-zinc-300 outline-zinc-400
+
+    rounded-lg 
+    bg-white
+  }
+
+  input[type="checkbox"]{
+    @apply 
+    w-5 
+    h-5 
+    rounded 
+    
+    accent-indigo-400
+  }
 }
 
 /* Componentes de UI ============================== */
 @layer components {
-  /* Botoes */
+  /* Padrão dos Botoes */
   .btn{
     @apply 
     px-4 
@@ -63,14 +88,49 @@
     text-sm
     text-gray-600
     border
+    border-zinc-300
     hover:scale-105 hover:shadow-sm
     cursor-pointer;
+  }
+
+  .card{
+    @apply 
+    rounded-lg 
+    p-3
+
+    bg-white 
+    border 
+    border-zinc-200
+  }
+
+  .task-list__item{
+    @apply
+
+    flex 
+    flex-col 
+    
+    md:flex-row 
+    md:items-center 
+    md:justify-between 
+    gap-3
+
+    px-3 py-2 
+    border-b border-zinc-200 last:border-b-0
+  }
+
+  .task-list__actions{
+    @apply
+    flex 
+    items-center 
+    gap-3
   }
 }
 
 /* Classes customizados pontuais ================== */
 @layer utilities {
+  /* Container com largura padrao */
   .container { 
-    @apply max-w-6xl mx-auto px-4;
+    @apply max-w-4xl mx-auto px-4;
   }
+
 }
