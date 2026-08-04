@@ -30,6 +30,7 @@ function App() {
       }
       
       setTasks( prevTasks => [...prevTasks, newTask])
+      setInputTask('')
     }
 
   }
