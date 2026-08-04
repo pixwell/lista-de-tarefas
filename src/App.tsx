@@ -20,6 +20,7 @@ function App() {
 
     if(!taskName){
       toast.error('Insira o nome da sua tarefa!')
+      inputTask.current?.classList.add('border-red-500')
     }
 
   }
@@ -32,7 +33,12 @@ function App() {
           <h1 className="text-center my-8">Lista de tarefas</h1>
 
           <form onSubmit={handleTasks} className="flex flex-col md:flex-row items-center justify-between gap-3 mb-5">
-            <input type="text" name="task-name" ref={inputTask} placeholder="Adicionar tarefa ..." className="h-12" /> 
+            
+            <input type="text" name="task-name" placeholder="Adicionar tarefa ..." className="h-12" 
+            ref={inputTask} 
+            onFocus={() => inputTask.current?.classList.remove('border-red-500')} 
+            /> 
+
             <input type="submit" value="Nova Tarefa" className="btn w-full md:w-auto h-12"/>
           </form>
 
