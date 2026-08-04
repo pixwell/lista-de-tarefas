@@ -10,19 +10,32 @@ interface TaskProps{
 
 function App() {
   const [tasks, setTasks] = useState<TaskProps[]>([])
-  const inputTask = useRef<HTMLInputElement>(null)
+  const [inputTask, setInputTask] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   function handleTasks(e: React.FormEvent<HTMLFormElement>){
     e.preventDefault()
 
     const formData = new FormData(e.currentTarget)
-    const taskName = formData.get('task-name')
+    const taskName = formData.get('task-name') as string
 
-    if(!taskName){
+    if(!taskName.trim()){
       toast.error('Insira o nome da sua tarefa!')
-      inputTask.current?.classList.add('border-red-500')
+      inputRef.current?.classList.add('border-red-500')
+    } else {
+      const newTask = {
+        id: crypto.randomUUID(),
+        name: taskName.trim(),
+        completed: false,
+      }
+      
+      setTasks( prevTasks => [...prevTasks, newTask])
     }
 
+  }
+
+  function handleStatus(task: TaskProps){
+    console.log(task)
   }
 
   return (
@@ -33,13 +46,15 @@ function App() {
           <h1 className="text-center my-8">Lista de tarefas</h1>
 
           <form onSubmit={handleTasks} className="flex flex-col md:flex-row items-center justify-between gap-3 mb-5">
-            
+
             <input type="text" name="task-name" placeholder="Adicionar tarefa ..." className="h-12" 
-            ref={inputTask} 
-            onFocus={() => inputTask.current?.classList.remove('border-red-500')} 
+            value={inputTask}
+            onChange={ e => setInputTask(e.target.value)}
+            ref={inputRef}
+            onFocus={() => inputRef.current?.classList.remove('border-red-500')}
             /> 
 
-            <input type="submit" value="Nova Tarefa" className="btn w-full md:w-auto h-12"/>
+            <input type="submit" value="Nova Tarefa" className="btn w-full md:w-auto h-12" />
           </form>
 
         </header>
@@ -57,7 +72,7 @@ function App() {
             {tasks.length > 0 ? tasks.map((task) => (
               <li key={task.id} className="task-list__item">
                 <label className="flex items-start md:items-center gap-2">
-                  <input type="checkbox" checked={task.completed} /> 
+                  <input type="checkbox" checked={task.completed} onChange={() => handleStatus(task)} /> 
                   {task.name}
                 </label>
 
