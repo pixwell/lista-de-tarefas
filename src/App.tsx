@@ -14,7 +14,7 @@ function App() {
   // Estado para armazenar o valor do input
   const [inputTask, setInputTask] = useState('')
   // Referencia para o input de tarefa
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputTextRef = useRef<HTMLInputElement>(null)
 
   // Funcao para lidar com o envio do formulario de tarefas
   function handleTasks(e: React.FormEvent<HTMLFormElement>){
@@ -25,7 +25,7 @@ function App() {
     // O input esta vazio?
     if(!taskName){
       toast.error('Insira o nome da sua tarefa!')
-      inputRef.current?.classList.add('border-red-500')
+      inputTextRef.current?.classList.add('border-red-500')
     } else {
       const newTask = {
         id: crypto.randomUUID(),
@@ -40,8 +40,19 @@ function App() {
 
   }
 
+  //Funcao para alterar o status da tarefa: Pendente | Concluido
   function handleStatus(task: TaskProps){
-    console.log(task)
+    
+    const taskList = tasks.map( item => {      
+      if(item.id == task.id){
+        return { ...item, completed: !item.completed }
+      } else {
+        return item
+      }
+    })
+
+    setTasks(taskList)
+    console.log(taskList);
   }
 
   return (
@@ -56,8 +67,8 @@ function App() {
             <input type="text" name="task-name" placeholder="Adicionar tarefa ..." className="h-12" 
             value={inputTask}
             onChange={ e => setInputTask(e.target.value)}
-            ref={inputRef}
-            onFocus={() => inputRef.current?.classList.remove('border-red-500')}
+            ref={inputTextRef}
+            onFocus={() => inputTextRef.current?.classList.remove('border-red-500')}
             /> 
 
             <input type="submit" value="Nova Tarefa" className="btn w-full md:w-auto h-12" />
@@ -78,7 +89,10 @@ function App() {
             {tasks.length > 0 ? tasks.map((task) => (
               <li key={task.id} className="task-list__item">
                 <label className="flex items-start md:items-center gap-2">
-                  <input type="checkbox" checked={task.completed} onChange={() => handleStatus(task)} /> 
+                  <input type="checkbox" 
+                  checked={task.completed} 
+                  onChange={() => handleStatus(task)} 
+                  /> 
                   {task.name}
                 </label>
 
