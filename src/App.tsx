@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { CiEdit, CiTrash } from "react-icons/ci";
 
 interface TaskProps{
@@ -9,11 +10,18 @@ interface TaskProps{
 
 function App() {
   const [tasks, setTasks] = useState<TaskProps[]>([])
+  const inputTask = useRef<HTMLInputElement>(null)
 
-  function HandleTasks(e: React.FormEvent<HTMLFormElement>){
+  function handleTasks(e: React.FormEvent<HTMLFormElement>){
     e.preventDefault()
 
-    alert('enviou')
+    const formData = new FormData(e.currentTarget)
+    const taskName = formData.get('task-name')
+
+    if(!taskName){
+      toast.error('Insira o nome da sua tarefa!')
+    }
+
   }
 
   return (
@@ -23,8 +31,8 @@ function App() {
         <header className="mb-5">
           <h1 className="text-center my-8">Lista de tarefas</h1>
 
-          <form onSubmit={HandleTasks} className="flex flex-col md:flex-row items-center justify-between gap-3 mb-5">
-            <input type="text" placeholder="Adicionar tarefa ..." className="h-12" /> 
+          <form onSubmit={handleTasks} className="flex flex-col md:flex-row items-center justify-between gap-3 mb-5">
+            <input type="text" name="task-name" ref={inputTask} placeholder="Adicionar tarefa ..." className="h-12" /> 
             <input type="submit" value="Nova Tarefa" className="btn w-full md:w-auto h-12"/>
           </form>
 
@@ -43,7 +51,7 @@ function App() {
             {tasks.length > 0 ? tasks.map((task) => (
               <li key={task.id} className="task-list__item">
                 <label className="flex items-start md:items-center gap-2">
-                  <input type="checkbox" /> 
+                  <input type="checkbox" checked={task.completed} /> 
                   {task.name}
                 </label>
 
