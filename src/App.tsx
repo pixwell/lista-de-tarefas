@@ -52,7 +52,6 @@ function App() {
     })
 
     setTasks(taskList)
-    console.log(taskList);
   }
 
   return (
@@ -88,10 +87,10 @@ function App() {
 
             {tasks.length > 0 ? tasks.map((task) => (
               <li key={task.id} className="task-list__item">
-                <label className="flex items-start md:items-center gap-2">
+                <label className={`flex items-start md:items-center gap-2 ${task.completed ? 'line-through italic text-zinc-400' : ''}`}>
                   <input type="checkbox" 
                   checked={task.completed} 
-                  onChange={() => handleStatus(task)} 
+                  onChange={() => handleStatus(task)}
                   /> 
                   {task.name}
                 </label>
