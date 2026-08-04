@@ -9,27 +9,30 @@ interface TaskProps{
 }
 
 function App() {
+  // Estado para armazenar as tarefas
   const [tasks, setTasks] = useState<TaskProps[]>([])
+  // Estado para armazenar o valor do input
   const [inputTask, setInputTask] = useState('')
+  // Referencia para o input de tarefa
   const inputRef = useRef<HTMLInputElement>(null)
 
+  // Funcao para lidar com o envio do formulario de tarefas
   function handleTasks(e: React.FormEvent<HTMLFormElement>){
     e.preventDefault()
 
-    const formData = new FormData(e.currentTarget)
-    const taskName = formData.get('task-name') as string
-
-    if(!taskName.trim()){
+    // O input esta vazio?
+    if(!inputTask.trim()){
       toast.error('Insira o nome da sua tarefa!')
       inputRef.current?.classList.add('border-red-500')
     } else {
       const newTask = {
         id: crypto.randomUUID(),
-        name: taskName.trim(),
+        name: inputTask.trim(),
         completed: false,
       }
-      
+      // Adiciona a nova tarefa ao estado de tarefas      
       setTasks( prevTasks => [...prevTasks, newTask])
+      // Limpa o input apos adicionar a tarefa
       setInputTask('')
     }
 
