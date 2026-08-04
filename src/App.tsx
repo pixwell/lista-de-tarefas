@@ -20,14 +20,16 @@ function App() {
   function handleTasks(e: React.FormEvent<HTMLFormElement>){
     e.preventDefault()
 
+    const taskName = inputTask.trim()
+
     // O input esta vazio?
-    if(!inputTask.trim()){
+    if(!taskName){
       toast.error('Insira o nome da sua tarefa!')
       inputRef.current?.classList.add('border-red-500')
     } else {
       const newTask = {
         id: crypto.randomUUID(),
-        name: inputTask.trim(),
+        name: taskName,
         completed: false,
       }
       // Adiciona a nova tarefa ao estado de tarefas      
