@@ -87,12 +87,12 @@ function App() {
 
             {tasks.length > 0 ? tasks.map((task) => (
               <li key={task.id} className="task-list__item">
-                <label className={`flex items-start md:items-center gap-2 ${task.completed ? 'line-through italic text-zinc-400' : ''}`}>
+                <label className="flex items-start md:items-center gap-2">
                   <input type="checkbox" 
                   checked={task.completed} 
                   onChange={() => handleStatus(task)}
                   /> 
-                  {task.name}
+                  <span className={task.completed ? 'line-through italic text-zinc-400' : undefined}>{task.name}</span>
                 </label>
 
                 <div className="task-list__actions">
