@@ -17,7 +17,7 @@ function App() {
   const inputTextRef = useRef<HTMLInputElement>(null)
 
   // Funcao para lidar com o envio do formulario de tarefas
-  function handleTasks(e: React.FormEvent<HTMLFormElement>){
+  function submitTasks(e: React.FormEvent<HTMLFormElement>){
     e.preventDefault()
 
     const taskName = inputTask.trim()
@@ -61,7 +61,7 @@ function App() {
         <header className="mb-5">
           <h1 className="text-center my-8">Lista de tarefas</h1>
 
-          <form onSubmit={handleTasks} className="flex flex-col md:flex-row items-center justify-between gap-3 mb-5">
+          <form onSubmit={submitTasks} className="flex flex-col md:flex-row items-center justify-between gap-3 mb-5">
 
             <input type="text" name="task-name" placeholder="Adicionar tarefa ..." className="h-12" 
             value={inputTask}
