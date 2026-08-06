@@ -31,8 +31,14 @@ function App() {
     if(!taskName){
       toast.error('Insira o nome da sua tarefa!')
       inputTextRef.current?.classList.add('border-red-500')
+    } 
+    // O modo de edicao esta ativo?
+    else if(editingTask !== null){
+      // Edita a tarefa
+      editTask(editingTask)
     } else {
-      createTask(taskName)      
+      // Cria a tarefa
+      createTask(taskName)
     }
 
   }
@@ -66,7 +72,9 @@ function App() {
     inputTextRef.current?.focus()
   }
 
-  
+  function editTask(task: TaskProps){
+    
+  }
 
   return (
     <main className="container">
