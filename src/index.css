@@ -49,7 +49,9 @@
   a,
   button,
   input[type="submit"] {
-    @apply transition-all duration-300;
+    @apply 
+    transition-all duration-300
+    cursor-pointer
   }
 
   input[type="text"]{
@@ -77,18 +79,25 @@
   /* Padrão dos Botoes */
   .btn{
     @apply 
-    px-4 
-    py-2 
+    px-4 py-2 
     inline-block 
     rounded-lg 
 
-    text-center
-    text-sm
+    text-center text-sm
     text-gray-600
-    border
-    border-zinc-300
+    border border-zinc-300
     hover:scale-105 hover:shadow-sm
     cursor-pointer;
+  }
+
+  .btn-cancel{
+    @apply
+    px-2 py-1 
+    rounded-full 
+    border border-zinc-300 hover:border-red-300 
+    text-zinc-400 hover:text-red-400 
+    text-xs 
+    font-bold
   }
 
   .card{
