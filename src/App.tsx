@@ -35,7 +35,7 @@ function App() {
     // O modo de edicao esta ativo?
     else if(editingTask !== null){
       // Edita a tarefa
-      //editTask(editingTask)
+      editTask(editingTask)
     } else {
       // Cria a tarefa
       createTask(taskName)
@@ -82,6 +82,20 @@ function App() {
     setEditingTask(task)
     // Preenche o campo com o nome da tarefa
     setInputTask(task.name)
+  }
+
+  // Edita a tarefa
+  function editTask(task: TaskProps){
+    const taskList = tasks.map(item => {
+      if(item.id === task.id){
+        return {...item, name: inputTask}
+      } else {
+        return item
+      }
+    })
+    
+    setTasks(taskList)
+    setInputTask('')
   }
 
   return (
