@@ -36,6 +36,7 @@ function App() {
       setTasks( prevTasks => [...prevTasks, newTask])
       // Limpa o input apos adicionar a tarefa
       setInputTask('')
+      inputTextRef.current?.focus()
     }
 
   }
@@ -51,7 +52,11 @@ function App() {
       }
     })
 
-    setTasks(taskList)
+    setTasks(taskList)    
+  }
+
+  function editTask(task: TaskProps){
+    setInputTask(task.name)    
   }
 
   return (
@@ -63,12 +68,15 @@ function App() {
 
           <form onSubmit={submitTasks} className="flex flex-col md:flex-row items-center justify-between gap-3 mb-5">
 
-            <input type="text" name="task-name" placeholder="Adicionar tarefa ..." className="h-12" 
-            value={inputTask}
-            onChange={ e => setInputTask(e.target.value)}
-            ref={inputTextRef}
-            onFocus={() => inputTextRef.current?.classList.remove('border-red-500')}
-            /> 
+            <div className="relative w-full">
+              <input type="text" name="task-name" placeholder="Adicionar tarefa ..." className="h-12"
+              value={inputTask}
+              onChange={ e => setInputTask(e.target.value)}
+              ref={inputTextRef}
+              onFocus={() => inputTextRef.current?.classList.remove('border-red-500')}
+              />
+              <button type="button" className="absolute top-3 right-3 btn-cancel">X</button>
+            </div>
 
             <input type="submit" value="Nova Tarefa" className="btn w-full md:w-auto h-12" />
           </form>
@@ -96,7 +104,7 @@ function App() {
                 </label>
 
                 <div className="task-list__actions">
-                  <button className="btn p-2">
+                  <button className="btn p-2" onClick={() => editTask(task)}>
                     <CiEdit size={26} color="blue" />
                   </button>
                   <button className="btn p-2">
