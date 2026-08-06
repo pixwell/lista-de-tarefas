@@ -11,8 +11,13 @@ interface TaskProps{
 function App() {
   // Estado para armazenar as tarefas
   const [tasks, setTasks] = useState<TaskProps[]>([])
+
   // Estado para armazenar o valor do input
   const [inputTask, setInputTask] = useState('')
+
+  // Estado para ativar/desativar modo de edicao
+  const [editingTask, setEditingTask] = useState<TaskProps|null>(null)
+
   // Referencia para o input de tarefa
   const inputTextRef = useRef<HTMLInputElement>(null)
 
@@ -27,16 +32,7 @@ function App() {
       toast.error('Insira o nome da sua tarefa!')
       inputTextRef.current?.classList.add('border-red-500')
     } else {
-      const newTask = {
-        id: crypto.randomUUID(),
-        name: taskName,
-        completed: false,
-      }
-      // Adiciona a nova tarefa ao estado de tarefas      
-      setTasks( prevTasks => [...prevTasks, newTask])
-      // Limpa o input apos adicionar a tarefa
-      setInputTask('')
-      inputTextRef.current?.focus()
+      createTask(taskName)      
     }
 
   }
@@ -55,9 +51,22 @@ function App() {
     setTasks(taskList)    
   }
 
-  function editTask(task: TaskProps){
-    setInputTask(task.name)    
+  function createTask(taskName: string){
+    const newTask = {
+      id: crypto.randomUUID(),
+      name: taskName,
+      completed: false,
+    }
+
+    // Adiciona a nova tarefa ao estado de tarefas      
+    setTasks( prevTasks => [...prevTasks, newTask])
+    // Limpa o input apos adicionar a tarefa
+    setInputTask('')
+    // Coloca o foco no campo
+    inputTextRef.current?.focus()
   }
+
+  
 
   return (
     <main className="container">
@@ -75,10 +84,12 @@ function App() {
               ref={inputTextRef}
               onFocus={() => inputTextRef.current?.classList.remove('border-red-500')}
               />
-              <button type="button" className="absolute top-3 right-3 btn-cancel">X</button>
+              {editingTask && (
+                <button type="button" className="absolute top-3 right-3 btn-cancel">X</button>
+              )}
             </div>
 
-            <input type="submit" value="Nova Tarefa" className="btn w-full md:w-auto h-12" />
+            <input type="submit" value={editingTask ? ('Editar Tarefa') : ('Nova Tarefa')} className="btn w-full md:w-auto h-12" />
           </form>
 
         </header>
