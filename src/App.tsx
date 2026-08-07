@@ -43,20 +43,6 @@ function App() {
 
   }
 
-  //Funcao para alterar o status da tarefa: Pendente | Concluido
-  function handleStatus(task: TaskProps){
-    
-    const taskList = tasks.map( item => {      
-      if(item.id == task.id){
-        return { ...item, completed: !item.completed }
-      } else {
-        return item
-      }
-    })
-
-    setTasks(taskList)    
-  }
-
   // Cria a tarefa
   function createTask(taskName: string){
     const newTask = {
@@ -91,6 +77,20 @@ function App() {
   function deleteTask(id: string){
     const taskList = tasks.filter((item) => item.id !== id)
     setTasks(taskList)
+  }
+
+  //Funcao para alterar o status da tarefa: Pendente | Concluido
+  function handleStatus(task: TaskProps){
+    
+    const taskList = tasks.map( item => {      
+      if(item.id == task.id){
+        return { ...item, completed: !item.completed }
+      } else {
+        return item
+      }
+    })
+
+    setTasks(taskList)    
   }
 
   // Gerencia a acao do botao para edicao
