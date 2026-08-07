@@ -73,15 +73,18 @@ function App() {
     inputTextRef.current?.focus()
   }
 
-  function editButton(task: TaskProps){
-    //Reseta estados
-    setEditingTask(null)
-    setInputTask('')
-
+  // Gerencia a acao do botao para edicao
+  function handleButton(task: TaskProps){
     // Ativa o modo de edicao e altera a interface
     setEditingTask(task)
     // Preenche o campo com o nome da tarefa
     setInputTask(task.name)
+  }
+
+  //Cancela a edicao da tarefa
+  function handleCancel(){
+    setInputTask('')
+    setEditingTask(null)
   }
 
   // Edita a tarefa
@@ -115,7 +118,7 @@ function App() {
               onFocus={() => inputTextRef.current?.classList.remove('border-red-500')}
               />
               {editingTask && (
-                <button type="button" className="absolute top-3 right-3 btn-cancel">X</button>
+                <button type="button" className="absolute top-3 right-3 btn-cancel" onClick={handleCancel}>X</button>
               )}
             </div>
 
@@ -145,7 +148,7 @@ function App() {
                 </label>
 
                 <div className="task-list__actions">
-                  <button className="btn p-2" onClick={() => editButton(task)}>
+                  <button className="btn p-2" onClick={() => handleButton(task)}>
                     <CiEdit size={26} color="blue" />
                   </button>
                   <button className="btn p-2">
