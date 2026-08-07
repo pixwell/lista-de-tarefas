@@ -73,6 +73,26 @@ function App() {
     inputTextRef.current?.focus()
   }
 
+  // Edita a tarefa
+  function editTask(task: TaskProps){
+    const taskList = tasks.map(item => {
+      if(item.id === task.id){
+        return {...item, name: inputTask}
+      } else {
+        return item
+      }
+    })
+    
+    setTasks(taskList)
+    handleReset()
+  }
+
+  //Deleta a tarefa
+  function deleteTask(id: string){
+    const taskList = tasks.filter((item) => item.id !== id)
+    setTasks(taskList)
+  }
+
   // Gerencia a acao do botao para edicao
   function handleButton(task: TaskProps){
     // Ativa o modo de edicao e altera a interface
@@ -87,19 +107,6 @@ function App() {
     setEditingTask(null)
   }
 
-  // Edita a tarefa
-  function editTask(task: TaskProps){
-    const taskList = tasks.map(item => {
-      if(item.id === task.id){
-        return {...item, name: inputTask}
-      } else {
-        return item
-      }
-    })
-    
-    setTasks(taskList)
-    handleReset()
-  }
 
   return (
     <main className="container">
@@ -151,7 +158,7 @@ function App() {
                   <button className="btn p-2" onClick={() => handleButton(task)}>
                     <CiEdit size={26} color="blue" />
                   </button>
-                  <button className="btn p-2">
+                  <button className="btn p-2" onClick={() => deleteTask(task.id)}>
                     <CiTrash size={26} color="red" />
                   </button>
                 </div>
