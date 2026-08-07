@@ -81,8 +81,8 @@ function App() {
     setInputTask(task.name)
   }
 
-  //Cancela a edicao da tarefa
-  function handleCancel(){
+  //Reseta os estados do Campo e Edicao
+  function handleReset(){
     setInputTask('')
     setEditingTask(null)
   }
@@ -98,7 +98,7 @@ function App() {
     })
     
     setTasks(taskList)
-    setInputTask('')
+    handleReset()
   }
 
   return (
@@ -118,7 +118,7 @@ function App() {
               onFocus={() => inputTextRef.current?.classList.remove('border-red-500')}
               />
               {editingTask && (
-                <button type="button" className="absolute top-3 right-3 btn-cancel" onClick={handleCancel}>X</button>
+                <button type="button" className="absolute top-3 right-3 btn-cancel" onClick={handleReset}>X</button>
               )}
             </div>
 
