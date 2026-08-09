@@ -8,10 +8,6 @@ interface TaskProps{
   completed: boolean;
 }
 
-interface FilterProps{
-
-}
-
 function App() {
   // Estado para armazenar as tarefas
   const [tasks, setTasks] = useState<TaskProps[]>([])
