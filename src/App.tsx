@@ -8,9 +8,15 @@ interface TaskProps{
   completed: boolean;
 }
 
+interface FilterProps{
+
+}
+
 function App() {
   // Estado para armazenar as tarefas
   const [tasks, setTasks] = useState<TaskProps[]>([])
+
+  const [TaskFilter, setTaskFilter] = useState<'all' | 'pending' | 'completed'>('all')
 
   // Estado para armazenar o valor do input
   const [inputTask, setInputTask] = useState('')
@@ -79,6 +85,15 @@ function App() {
     setTasks(taskList)
   }
 
+  //Filtra as tarefas
+  function getFilteredTasks(){
+    if(TaskFilter === 'all'){
+      return tasks
+    } else {
+      return tasks.filter( item => item.completed === (TaskFilter === 'completed'))
+    }
+  }
+
   //Funcao para alterar o status da tarefa: Pendente | Concluido
   function handleStatus(task: TaskProps){
     
@@ -106,7 +121,6 @@ function App() {
     setInputTask('')
     setEditingTask(null)
   }
-
 
   return (
     <main className="container">
@@ -136,15 +150,15 @@ function App() {
 
         <div className="card flex flex-col md:flex-row md:items-center md:justify-center gap-3 mb-1">
           <p>Filtrar Por:</p>
-          <button className="btn border-red-300 text-red-500 hover:bg-red-500/20">Pendentes</button>
-          <button className="btn border-green-300 text-green-500 hover:bg-green-500/20">Concluídas</button>
-          <button className="btn">Todas</button>
+          <button className="btn border-red-300 text-red-500 hover:bg-red-500/20" onClick={() => setTaskFilter('pending')}>Pendentes</button>
+          <button className="btn border-green-300 text-green-500 hover:bg-green-500/20" onClick={() => setTaskFilter('completed')}>Concluídas</button>
+          <button className="btn" onClick={() => setTaskFilter('all')}>Todas</button>
         </div>
 
         <div className="card">
           <ul className="task-list">
 
-            {tasks.length > 0 ? tasks.map((task) => (
+            {getFilteredTasks().length > 0 ? getFilteredTasks().map((task) => (
               <li key={task.id} className="task-list__item">
                 <label className="flex items-start md:items-center gap-2">
                   <input type="checkbox" 
