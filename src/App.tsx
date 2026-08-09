@@ -151,7 +151,7 @@ function App() {
           <button className="btn" onClick={() => setTaskFilter('all')}>Todas</button>
         </div>
 
-        <div className="card">
+        <div className="card mb-1">
           <ul className="task-list">
 
             {getFilteredTasks().length > 0 ? getFilteredTasks().map((task) => (
@@ -178,10 +178,13 @@ function App() {
                 <p className="italic">Nenhuma tarefa foi criada ainda.</p>
               </li>
             )}
-
-          </ul>
+          </ul>          
           
         </div>
+
+        <footer className="card mb-10">
+          <p className="text-center">Tarefas Pendentes: {tasks.filter( item => !item.completed).length}</p>
+        </footer>
 
       </article>
     </main>
