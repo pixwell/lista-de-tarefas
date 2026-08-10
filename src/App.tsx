@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { CiEdit, CiTrash } from "react-icons/ci";
 
@@ -7,6 +7,8 @@ interface TaskProps{
   name: string;
   completed: boolean;
 }
+
+const localStorageKey = 'LT_tasks'
 
 function App() {
   // Estado para armazenar as tarefas
@@ -22,6 +24,17 @@ function App() {
 
   // Referencia para o input de tarefa
   const inputTextRef = useRef<HTMLInputElement>(null)
+  
+  useEffect(() => {
+    //ler localStorage
+    const storage = localStorage.getItem(localStorageKey)
+
+    if (!storage){
+      return
+    }
+
+    setTasks(JSON.parse(storage))
+  }, [])
 
   // Funcao para lidar com o envio do formulario de tarefas
   function submitTasks(e: React.FormEvent<HTMLFormElement>){
