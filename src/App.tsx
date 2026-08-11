@@ -12,7 +12,15 @@ const localStorageKey = 'LT_tasks'
 
 function App() {
   // Estado para armazenar as tarefas
-  const [tasks, setTasks] = useState<TaskProps[]>([])
+  const [tasks, setTasks] = useState<TaskProps[]>(() => {
+    //Funcao inicializadora
+    const storage = localStorage.getItem(localStorageKey)
+    if (storage){
+      return JSON.parse(storage)
+    } else {
+      return []
+    }
+  })
 
   const [TaskFilter, setTaskFilter] = useState<'all' | 'pending' | 'completed'>('all')
 
@@ -24,17 +32,11 @@ function App() {
 
   // Referencia para o input de tarefa
   const inputTextRef = useRef<HTMLInputElement>(null)
-  
+
   useEffect(() => {
-    //ler localStorage
-    const storage = localStorage.getItem(localStorageKey)
-
-    if (!storage){
-      return
-    }
-
-    setTasks(JSON.parse(storage))
-  }, [])
+    const jsonData = JSON.stringify(tasks)    
+    localStorage.setItem(localStorageKey, jsonData)
+  },[tasks])
 
   // Funcao para lidar com o envio do formulario de tarefas
   function submitTasks(e: React.FormEvent<HTMLFormElement>){
