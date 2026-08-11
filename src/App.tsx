@@ -22,7 +22,7 @@ function App() {
     }
   })
 
-  const [TaskFilter, setTaskFilter] = useState<'all' | 'pending' | 'completed'>('all')
+  const [taskFilter, setTaskFilter] = useState<'all' | 'pending' | 'completed'>('all')
 
   // Estado para armazenar o valor do input
   const [inputTask, setInputTask] = useState('')
@@ -112,10 +112,10 @@ function App() {
 
   //Filtra as tarefas
   function getFilteredTasks(){
-    if(TaskFilter === 'all'){
+    if(taskFilter === 'all'){
       return tasks
     } else {
-      return tasks.filter( item => item.completed === (TaskFilter === 'completed'))
+      return tasks.filter( item => item.completed === (taskFilter === 'completed'))
     }
   }
 
@@ -182,15 +182,15 @@ function App() {
         <div className="card flex flex-col md:flex-row md:items-center md:justify-center gap-3 mb-1">
           <p>Filtrar Por:</p>
 
-          <button className="btn border-red-300 text-red-500 hover:bg-red-500/20" onClick={() => setTaskFilter('pending')} aria-pressed={TaskFilter === 'pending'}>
+          <button className="btn border-red-300 text-red-500 hover:bg-red-500/20" onClick={() => setTaskFilter('pending')} aria-pressed={taskFilter === 'pending'}>
             Pendentes
           </button>
 
-          <button className="btn border-green-300 text-green-500 hover:bg-green-500/20" onClick={() => setTaskFilter('completed')} aria-pressed={TaskFilter === 'completed'}>
+          <button className="btn border-green-300 text-green-500 hover:bg-green-500/20" onClick={() => setTaskFilter('completed')} aria-pressed={taskFilter === 'completed'}>
             Concluídas
           </button>
 
-          <button className="btn" onClick={() => setTaskFilter('all')} aria-pressed={TaskFilter === 'all'}>
+          <button className="btn" onClick={() => setTaskFilter('all')} aria-pressed={taskFilter === 'all'}>
             Todas
           </button>
 
