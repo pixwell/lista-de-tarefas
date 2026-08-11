@@ -123,7 +123,7 @@ function App() {
   function handleStatus(task: TaskProps){
     
     const taskList = tasks.map( item => {      
-      if(item.id == task.id){
+      if(item.id === task.id){
         return { ...item, completed: !item.completed }
       } else {
         return item
