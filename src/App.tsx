@@ -74,6 +74,7 @@ function App() {
     setInputTask('')
     // Coloca o foco no campo
     inputTextRef.current?.focus()
+    toast.success('Tarefa adicionada com sucesso!')
   }
 
   // Edita a tarefa
@@ -88,12 +89,14 @@ function App() {
     
     setTasks(taskList)
     handleReset()
+    toast.success('Tarefa editada com sucesso!')
   }
 
   //Deleta a tarefa
   function deleteTask(id: string){
     const taskList = tasks.filter((item) => item.id !== id)
     setTasks(taskList)
+    toast.success('Tarefa excluída')
   }
 
   //Filtra as tarefas
