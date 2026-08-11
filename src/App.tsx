@@ -147,6 +147,9 @@ function App() {
     setEditingTask(null)
   }
 
+  //Para nao ter que chamar a funcao 2 vezes, armazenei ela em uma const
+  const tarefasFiltradas = getFilteredTasks()
+
   return (
     <main className="container">
       <article>
@@ -199,7 +202,7 @@ function App() {
         <div className="card mb-1">
           <ul className="task-list">
 
-            {getFilteredTasks().length > 0 ? getFilteredTasks().map((task) => (
+            {tarefasFiltradas.length > 0 ? tarefasFiltradas.map((task) => (
               <li key={task.id} className="task-list__item">
                 <label className="flex items-start md:items-center gap-2">
                   <input type="checkbox" 
