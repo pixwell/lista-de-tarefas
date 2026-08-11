@@ -30,6 +30,9 @@ function App() {
   // Estado para ativar/desativar modo de edicao
   const [editingTask, setEditingTask] = useState<TaskProps|null>(null)
 
+  // Estado para controlar a resposta visual e de acessibilidade
+  const [inputError, setInputError] = useState(false)
+
   // Referencia para o input de tarefa
   const inputTextRef = useRef<HTMLInputElement>(null)
 
@@ -55,7 +58,7 @@ function App() {
     // O input esta vazio?
     if(!taskName){
       toast.error('Insira o nome da sua tarefa!')
-      inputTextRef.current?.classList.add('border-red-500')
+      setInputError(true)
     } 
     // O modo de edicao esta ativo?
     else if(editingTask !== null){
@@ -156,11 +159,13 @@ function App() {
             <div className="relative w-full">
               <label htmlFor="task-name" className="sr-only">Nome da tarefa</label>
 
-              <input type="text" id="task-name" name="task-name" placeholder="Adicionar tarefa ..." className="h-12"
+              <input type="text" id="task-name" name="task-name" placeholder="Adicionar tarefa ..." 
+              className={`h-12 ${inputError ? 'border-red-500' : ''}`}
               value={inputTask}
               onChange={ e => setInputTask(e.target.value)}
               ref={inputTextRef}
-              onFocus={() => inputTextRef.current?.classList.remove('border-red-500')}
+              onFocus={() => setInputError(false)}
+              aria-invalid={inputError}
               />
               {editingTask && (
                 <button type="button" className="absolute top-3 right-3 btn-cancel" onClick={handleReset} aria-label="Cancelar edição">
