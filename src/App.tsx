@@ -33,10 +33,18 @@ function App() {
   // Referencia para o input de tarefa
   const inputTextRef = useRef<HTMLInputElement>(null)
 
+  //Persiste os dados no localStorage
   useEffect(() => {
     const jsonData = JSON.stringify(tasks)    
     localStorage.setItem(localStorageKey, jsonData)
   },[tasks])
+
+  //Sincroniza o foco do DOM, para acessibilidade do campo editar tarefa
+  useEffect(() => {
+    if(editingTask){
+      inputTextRef.current?.focus()
+    }
+  }, [editingTask])
 
   // Funcao para lidar com o envio do formulario de tarefas
   function submitTasks(e: React.FormEvent<HTMLFormElement>){
@@ -146,14 +154,18 @@ function App() {
           <form onSubmit={submitTasks} className="flex flex-col md:flex-row items-center justify-between gap-3 mb-5">
 
             <div className="relative w-full">
-              <input type="text" name="task-name" placeholder="Adicionar tarefa ..." className="h-12"
+              <label htmlFor="task-name" className="sr-only">Nome da tarefa</label>
+
+              <input type="text" id="task-name" name="task-name" placeholder="Adicionar tarefa ..." className="h-12"
               value={inputTask}
               onChange={ e => setInputTask(e.target.value)}
               ref={inputTextRef}
               onFocus={() => inputTextRef.current?.classList.remove('border-red-500')}
               />
               {editingTask && (
-                <button type="button" className="absolute top-3 right-3 btn-cancel" onClick={handleReset}>X</button>
+                <button type="button" className="absolute top-3 right-3 btn-cancel" onClick={handleReset} aria-label="Cancelar edição">
+                  X
+                </button>
               )}
             </div>
 
@@ -164,9 +176,19 @@ function App() {
 
         <div className="card flex flex-col md:flex-row md:items-center md:justify-center gap-3 mb-1">
           <p>Filtrar Por:</p>
-          <button className="btn border-red-300 text-red-500 hover:bg-red-500/20" onClick={() => setTaskFilter('pending')}>Pendentes</button>
-          <button className="btn border-green-300 text-green-500 hover:bg-green-500/20" onClick={() => setTaskFilter('completed')}>Concluídas</button>
-          <button className="btn" onClick={() => setTaskFilter('all')}>Todas</button>
+
+          <button className="btn border-red-300 text-red-500 hover:bg-red-500/20" onClick={() => setTaskFilter('pending')} aria-pressed={TaskFilter === 'pending'}>
+            Pendentes
+          </button>
+
+          <button className="btn border-green-300 text-green-500 hover:bg-green-500/20" onClick={() => setTaskFilter('completed')} aria-pressed={TaskFilter === 'completed'}>
+            Concluídas
+          </button>
+
+          <button className="btn" onClick={() => setTaskFilter('all')} aria-pressed={TaskFilter === 'all'}>
+            Todas
+          </button>
+
         </div>
 
         <div className="card mb-1">
@@ -183,10 +205,10 @@ function App() {
                 </label>
 
                 <div className="task-list__actions">
-                  <button className="btn p-2" onClick={() => handleButton(task)}>
+                  <button className="btn p-2" onClick={() => handleButton(task)} aria-label="Editar Tarefa">
                     <CiEdit size={26} color="blue" />
                   </button>
-                  <button className="btn p-2" onClick={() => deleteTask(task.id)}>
+                  <button className="btn p-2" onClick={() => deleteTask(task.id)} aria-label="Excluir Tarefa">
                     <CiTrash size={26} color="red" />
                   </button>
                 </div>

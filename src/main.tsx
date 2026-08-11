@@ -9,6 +9,12 @@ createRoot(document.getElementById('root')!).render(
     <Toaster
       position="top-center"
       reverseOrder={false}
+      toastOptions={{
+      ariaProps: { //Configuracao para acessibilidade
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      }}
     />
     <App />
   </StrictMode>,
