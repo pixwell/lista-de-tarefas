@@ -2,6 +2,8 @@
 
 Aplicação web de gerenciamento de tarefas desenvolvida com React, TypeScript e Tailwind CSS. O projeto foi desenvolvido como parte da **Formação em Desenvolvimento Web Fullstack**, com foco na aplicação prática de conceitos de React, gerenciamento de estado, persistência de dados, acessibilidade e organização de código.
 
+**Demo:** [Lista de Tarefas](https://lista-de-tarefas-seven-kohl.vercel.app/)
+
 ## Tecnologias
 
 * React
