@@ -223,7 +223,7 @@ function App() {
               </li>
             )) : (
               <li className="task-list__item justify-center">
-                <p className="italic">Nenhuma tarefa foi criada ainda.</p>
+                <p className="italic">Nenhuma tarefa encontrada.</p>
               </li>
             )}
           </ul>          
