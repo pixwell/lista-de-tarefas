@@ -1,17 +1,17 @@
 # Lista de Tarefas
 
-Aplicação web de gerenciamento de tarefas desenvolvida com React e TypeScript, com persistência de dados no navegador.
+Aplicação web de gerenciamento de tarefas desenvolvida com React, TypeScript e Tailwind CSS. O projeto foi desenvolvido como parte da **Formação em Desenvolvimento Web Fullstack**, com foco na aplicação prática de conceitos de React, gerenciamento de estado, persistência de dados, acessibilidade e organização de código.
 
-## 🚀 Tecnologias
+## Tecnologias
 
 * React
 * TypeScript
 * Vite
 * Tailwind CSS
 * React Icons
-* LocalStorage
+* `localStorage`
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 * Criar uma tarefa
 * Visualizar a lista de tarefas
@@ -20,14 +20,13 @@ Aplicação web de gerenciamento de tarefas desenvolvida com React e TypeScript,
 * Desmarcar uma tarefa como concluída
 * Excluir uma tarefa
 * Filtrar tarefas por status:
-
   * Todas
   * Pendentes
   * Concluídas
 * Exibir a quantidade de tarefas pendentes
 * Persistir tarefas no `localStorage`
 
-## 📋 Regras de negócio
+## Regras de negócio
 
 * O título da tarefa é obrigatório.
 * Não é permitido criar ou salvar uma tarefa vazia.
@@ -36,32 +35,26 @@ Aplicação web de gerenciamento de tarefas desenvolvida com React e TypeScript,
 * A exclusão de uma tarefa é realizada imediatamente, sem confirmação.
 * As tarefas permanecem disponíveis após o recarregamento da página.
 
-## 📭 Estados vazios
+## Estados vazios
 
-Quando não houver tarefas para exibir, a aplicação apresenta uma mensagem de acordo com o filtro selecionado:
+Quando não houver tarefas para exibir, a aplicação apresenta a mensagem:
 
-* **Todas:** Nenhuma tarefa cadastrada.
-* **Pendentes:** Nenhuma tarefa pendente.
-* **Concluídas:** Nenhuma tarefa concluída.
+> Nenhuma tarefa encontrada.
 
-## 🛠️ Instalação
+## Instalação
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/pixwell/lista-de-tarefas.git
 
-cd <NOME_DO_PROJETO>
+cd lista-de-tarefas
 
 npm install
 
 npm run dev
 ```
 
-## 🌐 Deploy
+## Deploy
 
-O projeto será publicado na Vercel.
+Projeto publicado na Vercel.
 
-**Demo:** Em breve.
-
-## 📌 Status
-
-Em desenvolvimento.
+**Demo:** [Lista de Tarefas](https://lista-de-tarefas-seven-kohl.vercel.app/)
